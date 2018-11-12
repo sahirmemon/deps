@@ -1,0 +1,32 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.header {
+  background-color: #1A92DA;
+}
+.header h1 {
+  display: none;
+}
+.logo {
+  display: inline-block;
+  margin-top: 0;
+  font-family: 'deputy-icon';
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  color: #ffffff;
+  font-size: 2.5em;
+  padding: 20px;
+}
+.logo::before {
+  content: "\e903";
+}
