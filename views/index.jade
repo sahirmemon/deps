@@ -4,4 +4,34 @@ block content
   div.header
     h1= title
     div.logo
-  p Welcome to #{title}
+  div.container
+    div#login-form
+      div.form-container
+        div.form-container-label
+          span.form-label Email Address
+          a.form-label-link(href="/not-verified") Not verified?
+        div.form-container-input
+          input(type="email", name="email-address" required)
+      div.form-container
+        div.form-container-label
+          span.form-label Password
+          a.form-label-link(href="/forgot-password" required) Forgot Password
+        div.form-container-input
+          input(type="password", name="password")
+      div.form-container
+        input.btn.btn-full#login-btn(type="button", value="Log in")
+      div#alternative-login
+        span Or login with:
+      div.separator
+      div.form-container
+        div.social-logins
+          a.btn.facebook-login(href="https://once.deputy.com/connect/join?provider=FB") Facebook 
+          a.btn.google-login(href="https://once.deputy.com/connect/join?provider=GG") Google
+    div#alt-login
+      div
+        div
+          span Don't have a Deputy account? 
+        div
+          a(href="/sign-up") Sign up now
+          span Or join with
+          a(href="/third-party") third party service.

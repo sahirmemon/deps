@@ -2,6 +2,27 @@ doctype html
 html
   head
     title= Deputy
+    // Browser Appearance
+    // status bar styles: default, black, or black-translucent
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    // Home Screen Icons
+    // Standard Favicon - Make sure this comes last, otherwise some browsers will use the touch icons
+    link(rel='shortcut icon', href='/images/favicon.ico')
+    // For Safari pin tab
+    link(rel='mask-icon', href='/images/logo.svg', color='black')
+    // For iPad with high-resolution Retina display running iOS ≥ 7:
+    link(rel='apple-touch-icon-precomposed', sizes='152x152', href='/images/touch/favicon-152.png')
+    // For iPad with high-resolution Retina display running iOS ≤ 6:
+    link(rel='apple-touch-icon-precomposed', sizes='144x144', href='/images/touch/favicon-144.png')
+    // For iPhone with high-resolution Retina display running iOS ≥ 7:
+    link(rel='apple-touch-icon-precomposed', sizes='120x120', href='/images/touch/favicon-120.png')
+    // For iPhone with high-resolution Retina display running iOS ≤ 6:
+    link(rel='apple-touch-icon-precomposed', sizes='114x114', href='/images/touch/favicon-114.png')
+    // For first- and second-generation iPad:
+    link(rel='apple-touch-icon-precomposed', sizes='72x72', href='/images/touch/favicon-72.png')
+    // For non-Retina iPhone, iPod Touch, and Android 2.1+ devices:
+    link(rel='apple-touch-icon-precomposed', href='/images/touch/favicon-57.png')
+
     link(rel='stylesheet', href='/stylesheets/deputy-fonts.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     
