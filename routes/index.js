@@ -96,6 +96,73 @@ router.get('/question-3', function(req, res, next) {
   }
 });
 
+router.get('/question-4', function(req, res, next) {
+  const roles = [
+    {
+      Id: 1,
+      Name: 'System Administrator',
+      Parent: 0
+    },
+    {
+      Id: 2,
+      Name: 'Location Manager',
+      Parent: 1
+    },
+    {
+      Id: 3,
+      Name: 'Supervisor',
+      Parent: 2
+    },
+    {
+      Id: 4,
+      Name: 'Employee',
+      Parent: 3
+    }
+  ];
+
+  const users = [
+    {
+      Id: 1,
+      Name: 'Adam Admin',
+      Role: 1
+    },
+    {
+      Id: 2,
+      Name: 'Emily Employee',
+      Role: 4
+    },
+    {
+      Id: 3,
+      Name: 'Sam Supervisor',
+      Role: 3
+    },
+    {
+      Id: 4,
+      Name: 'Mary Manager',
+      Role: 2
+    },
+    {
+      Id: 5,
+      Name: 'Charles Employee',
+      Role: 4
+    },
+    {
+      Id: 6,
+      Name: 'Chadwick Employee',
+      Role: 4
+    },
+    {
+      Id: 7,
+      Name: 'Tom Manager',
+      Role: 2
+    },
+  ];
+  const userId = 7;
+  const lookingSubordinatesFor = users.find(u => u.Id === userId);
+  const foundUsers = getSubordinates(userId, users, roles);
+  res.send({ users: users, roles: roles, lookingForUserId: userId, 
+    lookingSubordinatesFor: lookingSubordinatesFor, found: foundUsers });
+});
 
 function checkOverlap(startTimeA, endTimeA, startTimeB, endTimeB) {
   // If the startTimeA comes before the endTimeB that means
@@ -108,6 +175,26 @@ function checkOverlap(startTimeA, endTimeA, startTimeB, endTimeB) {
   else {
     return false;
   }
+}
+
+function getSubordinates(userId, users, roles) {
+  // Get the user from users array
+  const user = users.find(u => u.Id === userId);
+  if (user) {
+    // Get the user's role
+    const userRole = roles.find(role => role.Id === user.Role);
+    if (userRole) {
+      // Find the subordinate role for this user's role
+      const subRole = roles.find(r => r.Parent === userRole.Id);
+      if (subRole) {
+        // Now that we have the subordinate role, lets get all the users who
+        // have this role
+        const subUsers = users.find(r => r.Role === subRole.Id);
+        return subUsers;
+      }
+    }
+  }
+  return 'None found';
 }
 
 module.exports = router;
