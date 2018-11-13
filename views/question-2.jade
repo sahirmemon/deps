@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  div.header
+    h1= title
+    div.logo
+  div.q2-container
+    table#pnlTeamTable.m-team-list
+      thead
+        tr(style='white-space:nowrap;')
+          th.nameAccessHeader Name & Access
+          th.tdCompany(style='') Main Location
+          th.actions.u-textRight Actions
+      tbody
