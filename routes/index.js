@@ -62,4 +62,42 @@ router.get('/question-2-data', function(req, res, next) {
   res.send({ users: users, roles: roles, locations: locations });
 });
 
+router.get('/question-3', function(req, res, next) {
+  const roster1 = {
+    Id: 1,
+    Employee: 1,
+    Department: 1,
+    StartTime: 1508450400,
+    EndTime: 1508479200
+  };
+  const roster2 = {
+    Id: 1,
+    Employee: 1,
+    Department: 1,
+    StartTime: 1508457600, //1508630400,
+    EndTime: 1508486400 //1508652000
+  };
+
+  // Check to see if the StartTime & EndTime of Roster2 overlaps 
+  // with StartTime & EndTime of Roster1
+
+  // First check to see if the employees are the same
+  if (roster1.Id === roster2.Id) {
+    // If the Roster1's StartTime comes before the Roster2's EndTime that means
+    // there is an overlap since Roster2 is currently underway
+    // Also, if Roster1's EndTime comes after Roster2's StartTime that also means
+    // there is an overlap
+    if ((roster1.StartTime <= roster2.EndTime) && (roster1.EndTime >= roster2.StartTime)) {
+      res.send({ overlap_exists: true});
+    }
+    else {
+      // There is no overlap
+      res.send({ overlap_exists: false});
+    }
+  }
+  else {
+    res.send({ overlap_exists: false});
+  }
+});
+
 module.exports = router;
