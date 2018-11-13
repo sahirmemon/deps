@@ -83,11 +83,7 @@ router.get('/question-3', function(req, res, next) {
 
   // First check to see if the employees are the same
   if (roster1.Id === roster2.Id) {
-    // If the Roster1's StartTime comes before the Roster2's EndTime that means
-    // there is an overlap since Roster2 is currently underway
-    // Also, if Roster1's EndTime comes after Roster2's StartTime that also means
-    // there is an overlap
-    if ((roster1.StartTime <= roster2.EndTime) && (roster1.EndTime >= roster2.StartTime)) {
+    if (checkOverlap(roster1.StartTime, roster1.EndTime, roster2.StartTime, roster2.EndTime)) {
       res.send({ overlap_exists: true});
     }
     else {
@@ -99,5 +95,19 @@ router.get('/question-3', function(req, res, next) {
     res.send({ overlap_exists: false});
   }
 });
+
+
+function checkOverlap(startTimeA, endTimeA, startTimeB, endTimeB) {
+  // If the startTimeA comes before the endTimeB that means
+  // there is an overlap since B is currently underway
+  // Also, if endTimeA comes after startTimeB that also means
+  // there is an overlap
+  if ((startTimeA <= endTimeB) && (endTimeA >= startTimeB)) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
 
 module.exports = router;
