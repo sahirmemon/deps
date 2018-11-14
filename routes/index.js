@@ -159,7 +159,8 @@ router.get('/question-4', function(req, res, next) {
   ];
   const userId = 7;
   const lookingSubordinatesFor = users.find(u => u.Id === userId);
-  const foundUsers = getSubordinates(userId, users, roles);
+  let foundUsers = [];
+  getSubordinates(userId, users, roles, foundUsers);
   res.send({ users: users, roles: roles, lookingForUserId: userId, 
     lookingSubordinatesFor: lookingSubordinatesFor, found: foundUsers });
 });
@@ -177,7 +178,7 @@ function checkOverlap(startTimeA, endTimeA, startTimeB, endTimeB) {
   }
 }
 
-function getSubordinates(userId, users, roles) {
+function getSubordinates(userId, users, roles, subs) {
   // Get the user from users array
   const user = users.find(u => u.Id === userId);
   if (user) {
@@ -187,14 +188,21 @@ function getSubordinates(userId, users, roles) {
       // Find the subordinate role for this user's role
       const subRole = roles.find(r => r.Parent === userRole.Id);
       if (subRole) {
+        console.log(`subRole:`);
+        console.log(subRole);
         // Now that we have the subordinate role, lets get all the users who
         // have this role
-        const subUsers = users.find(r => r.Role === subRole.Id);
-        return subUsers;
+        const subUsers = users.filter(r => r.Role === subRole.Id);
+        for(const u of subUsers) {
+          subs.push(u);
+          getSubordinates(u.Id, users, roles, subs);
+        }
+      }
+      else {
+        return subs;
       }
     }
   }
-  return 'None found';
 }
 
 module.exports = router;
